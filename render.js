@@ -174,7 +174,7 @@ function renderAll(T, runId) {
   if (!T) return `<p class="p-12 text-center italic opacity-70">Сетка всё ещё у печатника…</p>`
   return `
   <header class="masthead">
-    <p class="text-[0.7rem] uppercase tracking-[0.35em] opacity-70">США · Мексика · Канада — 11 июня – 19 июля 2026</p>
+    <p class="text-[0.7rem] uppercase tracking-[0.35em] opacity-70">США · Мексика · Канада — 11 июня – 19 июля 2026 · время минское (UTC+3)</p>
     <h1>Чемпионат мира 2026<span> · Полная турнирная таблица с прогнозами</span></h1>
     <p class="mt-1 text-[0.8rem] opacity-80 max-w-[70ch] mx-auto">Все 104 матча спрогнозированы до старта турнира флотом из 50 агентов Claude — предсказатели групп, аналитики плей-офф и судейская коллегия для полуфиналов и финала. Счета проставлены вручную. Ни один матч не пострадал.</p>
   </header>
