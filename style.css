@@ -86,3 +86,131 @@ body {
   .match-card, .group-panel { transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1); }
   .match-card:hover, .group-panel:hover { transform: translate(-1px, -1px); }
 }
+
+/* ── Tailwind replacements ── */
+
+/* Layout */
+.mx-auto { margin-left: auto; margin-right: auto; }
+.w-full { width: 100%; }
+.min-w-0 { min-width: 0; }
+.overflow-x-auto { overflow-x: auto; }
+
+/* Sizing */
+.max-w-\[1480px\] { max-width: 1480px; }
+.max-w-\[70ch\] { max-width: 70ch; }
+.min-w-\[1140px\] { min-width: 1140px; }
+.min-w-\[2\.5ch\] { min-width: 2.5ch; }
+
+/* Spacing */
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.pt-2 { padding-top: 0.5rem; }
+.pt-4 { padding-top: 1rem; }
+.pr-1 { padding-right: 0.25rem; }
+.p-12 { padding: 3rem; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-8 { margin-top: 2rem; }
+.mt-10 { margin-top: 2.5rem; }
+.mt-12 { margin-top: 3rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mr-1 { margin-right: 0.25rem; }
+.mx-0\.5 { margin-left: 0.125rem; margin-right: 0.125rem; }
+
+/* Flex */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.items-baseline { align-items: baseline; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+.justify-center { justify-content: center; }
+.shrink-0 { flex-shrink: 0; }
+
+/* Grid */
+.grid { display: grid; }
+.grid-cols-\[auto_1fr_auto_1fr_auto\] { grid-template-columns: auto 1fr auto 1fr auto; }
+.gap-1 { gap: 0.25rem; }
+.gap-1\.5 { gap: 0.375rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+.gap-6 { gap: 1.5rem; }
+.gap-8 { gap: 2rem; }
+.gap-x-1 { column-gap: 0.25rem; }
+.gap-x-6 { column-gap: 1.5rem; }
+.gap-x-8 { column-gap: 2rem; }
+.gap-y-1 { row-gap: 0.25rem; }
+.gap-y-1\.5 { row-gap: 0.375rem; }
+
+/* Typography */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-sm { font-size: 0.875rem; }
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+.uppercase { text-transform: uppercase; }
+.normal-case { text-transform: none; }
+.italic { font-style: italic; }
+.tabular-nums { font-variant-numeric: tabular-nums; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.leading-snug { line-height: 1.375; }
+.tracking-wider { letter-spacing: 0.05em; }
+.tracking-normal { letter-spacing: 0; }
+.text-\[0\.45rem\] { font-size: 0.45rem; }
+.text-\[0\.5rem\] { font-size: 0.5rem; }
+.text-\[0\.55rem\] { font-size: 0.55rem; }
+.text-\[0\.6rem\] { font-size: 0.6rem; }
+.text-\[0\.62rem\] { font-size: 0.62rem; }
+.text-\[0\.65rem\] { font-size: 0.65rem; }
+.text-\[0\.68rem\] { font-size: 0.68rem; }
+.text-\[0\.7rem\] { font-size: 0.7rem; }
+.text-\[0\.72rem\] { font-size: 0.72rem; }
+.text-\[0\.75rem\] { font-size: 0.75rem; }
+.text-\[0\.8rem\] { font-size: 0.8rem; }
+.tracking-\[0\.12em\] { letter-spacing: 0.12em; }
+.tracking-\[0\.18em\] { letter-spacing: 0.18em; }
+.tracking-\[0\.25em\] { letter-spacing: 0.25em; }
+.tracking-\[0\.35em\] { letter-spacing: 0.35em; }
+
+/* Colors */
+.text-\[var\(--ink\)\] { color: var(--ink); }
+.text-green-700 { color: #15803d; }
+.text-amber-600 { color: #d97706; }
+
+/* Borders */
+.border-t { border-top-width: 1px; }
+.border-t-2 { border-top-width: 2px; }
+.border-dotted { border-style: dotted; }
+.border-collapse { border-collapse: collapse; }
+.border-\[var\(--ink\)\] { border-color: var(--ink); }
+.border-\[var\(--rule\)\] { border-color: var(--rule); }
+
+/* Opacity */
+.opacity-45 { opacity: 0.45; }
+.opacity-50 { opacity: 0.5; }
+.opacity-55 { opacity: 0.55; }
+.opacity-60 { opacity: 0.6; }
+.opacity-70 { opacity: 0.7; }
+.opacity-75 { opacity: 0.75; }
+.opacity-80 { opacity: 0.8; }
+.opacity-90 { opacity: 0.9; }
+.opacity-100 { opacity: 1; }
+
+/* Responsive: sm (>=640px) */
+@media (min-width: 640px) {
+  .sm\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+  .sm\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Responsive: lg (>=1024px) */
+@media (min-width: 1024px) {
+  .lg\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .lg\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Responsive: xl (>=1280px) */
+@media (min-width: 1280px) {
+  .xl\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+}
