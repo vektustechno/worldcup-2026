@@ -38,14 +38,19 @@ function formatDate(iso) {
   const dow = DAYS_RU[d.getDay()]
   const hh = String(d.getHours()).padStart(2, '0')
   const mm = String(d.getMinutes()).padStart(2, '0')
-  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone.replace(/_/g, ' ')
   return `${dd} ${mo} (${dow}), ${hh}:${mm}`
 }
 
 function shortTz() {
   const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
   const parts = tz.split('/')
-  return parts.length > 1 ? parts.slice(1).join('/').replace(/_/g, ' ') : tz
+  const name = parts.length > 1 ? parts.slice(1).join('/').replace(/_/g, ' ') : tz
+  const now = new Date()
+  const off = -now.getTimezoneOffset()
+  const hh = String(Math.abs(Math.floor(off / 60))).padStart(2, '0')
+  const mm = String(Math.abs(off % 60)).padStart(2, '0')
+  const sign = off >= 0 ? '+' : '-'
+  return `${name} (UTC${sign}${hh}:${mm})`
 }
 
 function penText(m) {
