@@ -27,6 +27,27 @@ function esc(s) {
   return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]))
 }
 
+const DAYS_RU = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота']
+const MONTHS_RU = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря']
+
+function formatDate(iso) {
+  if (!iso) return ''
+  const d = new Date(iso)
+  const dd = d.getDate()
+  const mo = MONTHS_RU[d.getMonth()]
+  const dow = DAYS_RU[d.getDay()]
+  const hh = String(d.getHours()).padStart(2, '0')
+  const mm = String(d.getMinutes()).padStart(2, '0')
+  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone.replace(/_/g, ' ')
+  return `${dd} ${mo} (${dow}), ${hh}:${mm}`
+}
+
+function shortTz() {
+  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
+  const parts = tz.split('/')
+  return parts.length > 1 ? parts.slice(1).join('/').replace(/_/g, ' ') : tz
+}
+
 function penText(m) {
   if (m.decidedBy === 'penalties') return `${m.penHome}–${m.penAway} по пенальти`
   if (m.decidedBy === 'extra_time') return 'после овертайма'
@@ -51,7 +72,7 @@ function matchCard(m, opts = {}) {
   const statusClass = isCompleted ? 'match-completed' : 'match-predicted'
   const votes = m.panelVotes ? `<span class="opacity-70">состав: ${esc(m.panelVotes.replace(m.winner, '').trim())} за ${esc(short(m.winner))}</span>` : ''
   const note = opts.showNote && m.note ? `<p class="mt-1 text-[0.68rem] leading-snug italic opacity-75">${esc(m.note)}</p>` : ''
-  const dateHtml = m.date ? `<span class="text-[0.55rem] opacity-50">${esc(m.date)}</span>` : ''
+  const dateHtml = m.date ? `<span class="text-[0.55rem] opacity-50">${esc(formatDate(m.date))}</span>` : ''
   return `<div class="match-card ${statusClass} ${opts.extraClass || ''}" ${m.note && !opts.showNote ? `title="${esc(m.note)}"` : ''}>
     <div class="flex justify-between text-[0.6rem] uppercase tracking-[0.12em] opacity-60 mb-1">
       <span>M${m.match}</span><span>${esc(opts.caption || '')}</span>
@@ -74,12 +95,12 @@ function renderBracket(T) {
   const final = ko(T, 104), third = ko(T, 103)
   const center = `<div class="flex flex-col justify-center gap-6">
     <div>
-      <p class="text-center text-[0.65rem] uppercase tracking-[0.25em] mb-2 opacity-70">Финал · MetLife Stadium · 19 июля</p>
+      <p class="text-center text-[0.65rem] uppercase tracking-[0.25em] mb-2 opacity-70">Финал · MetLife Stadium · ${esc(formatDate(ko(T, 104).date))}</p>
       ${matchCard(final, { caption: 'Финал', showNote: true, extraClass: 'final-card' })}
       <div class="stamp-wrap"><div class="stamp">${flag(T.champion)} ${esc(T.champion)}<span>Чемпионы мира 2026</span></div></div>
     </div>
     <div>
-      <p class="text-center text-[0.65rem] uppercase tracking-[0.25em] mb-2 opacity-70">Матч за 3-е место</p>
+      <p class="text-center text-[0.65rem] uppercase tracking-[0.25em] mb-2 opacity-70">Матч за 3-е место · ${esc(formatDate(ko(T, 103).date))}</p>
       ${matchCard(third, { caption: 'Бронза', showNote: true })}
     </div>
   </div>`
@@ -111,7 +132,7 @@ function renderGroups(T) {
     const matches = g.matches.map(m => {
       const isCompleted = m.status === 'completed'
       return `<div class="grid grid-cols-[auto_1fr_auto_1fr_auto] gap-x-1 text-[0.72rem] items-baseline ${isCompleted ? 'opacity-90' : 'opacity-100'}" title="${esc(m.note || '')}">
-        <span class="text-[0.5rem] opacity-50">${esc(m.date || '')}</span>
+        <span class="text-[0.5rem] opacity-50">${esc(formatDate(m.date) || '')}</span>
         <span class="truncate text-right">${flag(m.home)} ${esc(short(m.home))}</span>
         <span class="score score-sm text-center mx-0.5 min-w-[2.5ch]">${m.homeGoals}–${m.awayGoals}</span>
         <span class="truncate">${flag(m.away)} ${esc(short(m.away))}</span>
@@ -174,7 +195,7 @@ function renderAll(T, runId) {
   if (!T) return `<p class="p-12 text-center italic opacity-70">Сетка всё ещё у печатника…</p>`
   return `
   <header class="masthead">
-    <p class="text-[0.7rem] uppercase tracking-[0.35em] opacity-70">США · Мексика · Канада — 11 июня – 19 июля 2026 · время минское (UTC+3)</p>
+    <p class="text-[0.7rem] uppercase tracking-[0.35em] opacity-70">США · Мексика · Канада — 11 июня – 19 июля 2026 · время местное (<span id="tz-indicator">${esc(shortTz())}</span>)</p>
     <h1>Чемпионат мира 2026<span> · Полная турнирная таблица с прогнозами</span></h1>
     <p class="mt-1 text-[0.8rem] opacity-80 max-w-[70ch] mx-auto">Все 104 матча спрогнозированы до старта турнира флотом из 50 агентов Claude — предсказатели групп, аналитики плей-офф и судейская коллегия для полуфиналов и финала. Счета проставлены вручную. Ни один матч не пострадал.</p>
   </header>
