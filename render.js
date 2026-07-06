@@ -17,8 +17,8 @@ const SHORT = {
   'Bosnia and Herzegovina': 'Bosnia & Herz.', 'United States': 'United States',
 }
 
-const BRACKET_LEFT = { r32: [74, 77, 73, 75, 83, 84, 81, 82], r16: [89, 90, 93, 94], qf: [97, 98], sf: [101] }
-const BRACKET_RIGHT = { r32: [76, 78, 79, 80, 86, 88, 85, 87], r16: [91, 92, 95, 96], qf: [99, 100], sf: [102] }
+const BRACKET_LEFT = { r32: [75, 78, 73, 76, 74, 77, 79, 80], r16: [89, 90, 91, 92], qf: [97, 98], sf: [101] }
+const BRACKET_RIGHT = { r32: [83, 84, 81, 82, 87, 86, 88, 85], r16: [93, 94, 95, 96], qf: [99, 100], sf: [102] }
 
 function flag(team) { const c = FLAG_CODE[team]; return c ? `<span class="fi fi-${c}"></span>` : '🏳️' }
 function short(team) { return SHORT[team] || team }
