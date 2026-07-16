@@ -2085,7 +2085,7 @@ const TOURNAMENT = {
   {
      "match": 103,
      "status": "predicted",
-     "date": "2026-07-18T18:00:00.000Z",
+     "date": "2026-07-18T21:00:00.000Z",
      "round": "Матч за 3-е место",
      "home": "France",
      "away": "England",
@@ -2102,7 +2102,7 @@ const TOURNAMENT = {
   {
      "match": 104,
      "status": "predicted",
-     "date": "2026-07-19T18:00:00.000Z",
+     "date": "2026-07-19T19:00:00.000Z",
      "round": "Финал",
      "home": "Spain",
      "away": "Argentina",
